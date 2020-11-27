@@ -1,3 +1,5 @@
+package Client;
+
 import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -7,7 +9,8 @@ public class Client {
     DataInputStream response;
     Socket clientSocket = null;
 
-    public void CreateSocket(String host, int port) throws IOException {
+    public void CreateSocket(String host, int port) throws IOException
+    {
         clientSocket = new Socket(host, port);
 
         System.out.println("======================================");
@@ -23,8 +26,8 @@ public class Client {
     }
 
     public void Login(String userName, String Password)
-            throws IOException {
-
+            throws IOException
+    {
         // Sending request to the server
         request.writeUTF("Login,UserName:" + userName + ",Password:" + Password);
         System.out.println("Login,UserName:" + userName + ",Password:" + Password);
@@ -41,12 +44,13 @@ public class Client {
         else
             System.out.println(responseLine);
         System.out.println("======================================");
-        System.out.println("Response Recieved!!");
+        System.out.println("Response Received!!");
         System.out.println("======================================");
     }
 
     public void Register(String userName, String Password)
-            throws IOException {
+            throws IOException
+    {
         // Sending request to the server
         // Building HTTP request header
         request.writeUTF("Register,UserName:" + userName + ",Password:" + Password);
@@ -66,9 +70,8 @@ public class Client {
     }
 
     public void Close()
-            throws IOException {
-
-
+            throws IOException
+    {
         // Sending request to the server
         // Building HTTP request header
         request.writeUTF("Close");

@@ -1,3 +1,7 @@
+package Server;
+
+import Server.ServerUtils.MultiThreadedServer;
+
 import java.io.IOException;
 
 class MyServer {
@@ -9,14 +13,17 @@ class MyServer {
      * @throws InterruptedException
      */
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException
+    {
         int portNumber = 889;
 
 //		int portNumber = 5554;
-        try {
+        try
+        {
             // initializing the Socket Server
-            MultiThreadedServer socketServer = new MultiThreadedServer(
-                    portNumber);
+            MultiThreadedServer socketServer =
+                    new MultiThreadedServer(portNumber);
+
             socketServer.start();
 
         } catch (IOException e) {
