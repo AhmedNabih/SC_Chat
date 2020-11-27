@@ -1,6 +1,7 @@
 package Client;
 
 import java.io.*;
+import java.net.ConnectException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
@@ -8,10 +9,21 @@ public class Client {
     DataOutputStream request;
     DataInputStream response;
     Socket clientSocket = null;
+    boolean Conneceted = false;
 
     public void CreateSocket(String host, int port) throws IOException
     {
-        clientSocket = new Socket(host, port);
+        Conneceted  = false;
+        try {
+            clientSocket = new Socket(host, port);
+        }
+        catch (ConnectException e)
+        {
+            System.out.println("ConnectException");
+            return;
+        }
+
+        Conneceted = true;
 
         System.out.println("======================================");
         System.out.println("Connected");
@@ -23,6 +35,7 @@ public class Client {
         // Declare a listener to this url
         response = new DataInputStream(
                 clientSocket.getInputStream());
+
     }
 
     public void Login(String userName, String Password)
