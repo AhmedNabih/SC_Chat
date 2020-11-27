@@ -1,5 +1,7 @@
 package Server.ServerClientHandler;
 
+import Server.ServerFrame.ServerFrame;
+
 import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
@@ -37,14 +39,14 @@ public class SocketClientHandler implements Runnable {
              while (true){
                if(!client.isClosed()) {
                 String Request = request.readUTF();
-                System.out.println(Request);
-                String[] RequstFields = Request.split(",");
-                switch (RequstFields[0]) {
+                ServerFrame newFrame = new ServerFrame(Request);
+                String ss="";
+                switch (newFrame.Operation)
+                {
+                    
                     case "Login": {
-                        String[] FirstArg = RequstFields[1].split(":");
-                        String UserName = FirstArg[1];
-                        String[] SecondArgs = RequstFields[2].split(":");
-                        String Password = SecondArgs[1];
+                        String UserName = newFrame.UserName;
+                        String Password = newFrame.Msg;
 
                         try {
                             // assuming we have 1 user only for now for simplicity
@@ -76,10 +78,10 @@ public class SocketClientHandler implements Runnable {
                         break;
                     }
                     case "Register": {
-                        String[] FirstArg = RequstFields[1].split(":");
-                        String UserName = FirstArg[1];
-                        String[] SecondArgs = RequstFields[2].split(":");
-                        String Password = SecondArgs[1];
+                        String UserName = newFrame.UserName;
+                        String []temp = newFrame.Msg.split("\0");
+                        String Password = temp[0];
+                        String Name = temp[1];
 
                         try {
                             FileWriter myWriter = new FileWriter("filename.txt");
