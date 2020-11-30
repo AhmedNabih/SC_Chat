@@ -118,4 +118,11 @@ public class UserFriends {
 
         this.WriteFile(fileDataw);
     }
+
+    public ArrayList<String> GetFriend(String userName)
+    {
+        ArrayList<String> fileData = ReadFile();
+
+        return fileData;
+    }
 }
